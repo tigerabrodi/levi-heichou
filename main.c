@@ -31,6 +31,8 @@ int main()
 	int randomIndexForVerbs = rand() % (sizeof(verbs) / sizeof(verbs[0]));
 	int randomIndexForObjects = rand() % (sizeof(objects) / sizeof(objects[0]));
 
+	double total_accuracy = 0;
+
 	printf("Welcome to Levi!\n");
 	printf("This is typing practice game.\n");
 	printf("We will calculate your accuracy throughout your tries.\n");
@@ -40,7 +42,25 @@ int main()
 
 	while (1)
 	{
-	}
+		printf("Enter the sentence as fast as you can: %s", create_random_sentence());
+		int user_sentence_length = get_arr_length(subjects) + get_arr_length(verbs) + get_arr_length(objects) + 1;
+		char user_sentence[user_sentence_length];
+		fgets(user_sentence, user_sentence_length, stdin);
+
+		if (user_sentence == "end")
+		{
+			printf("Your score is: 0");
+			break;
+		}
+
+		if (user_sentence == "score")
+		{
+			printf("Your score is: 0");
+			continue;
+		}
+
+		// Here we calculate accuracy
+		}
 
 	return 0;
 }
