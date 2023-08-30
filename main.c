@@ -78,6 +78,7 @@ int main()
 		if (user_sentence == "end")
 		{
 			printf("Your accuracy score is: %f", total_accuracy);
+			printf("Thanks for playing!");
 			break;
 		}
 
