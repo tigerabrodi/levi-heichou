@@ -24,6 +24,33 @@ char *create_random_sentence()
 	return sentence;
 }
 
+double calculateAccuracy(char *original, char *input)
+{
+	int lengthOriginal = strlen(original);
+	int lengthInput = strlen(input);
+	int errors = 0;
+
+	// If the lengths differ, add the difference to errors
+	if (lengthOriginal != lengthInput)
+	{
+		errors += abs(lengthOriginal - lengthInput);
+	}
+
+	// Iterate over the smallest length
+	int lengthToIterate = lengthOriginal < lengthInput ? lengthOriginal : lengthInput;
+
+	for (int i = 0; i < lengthToIterate; i++)
+	{
+		if (original[i] != input[i])
+		{
+			errors++;
+		}
+	}
+
+	int totalCharacters = lengthOriginal; // Total characters from the original sentence
+	return 100.0 * (totalCharacters - errors) / totalCharacters;
+}
+
 int main()
 {
 
@@ -42,25 +69,27 @@ int main()
 
 	while (1)
 	{
-		printf("Enter the sentence as fast as you can: %s", create_random_sentence());
+		char *random_sentence = create_random_sentence();
+		printf("Enter the sentence as fast as you can: %s", random_sentence);
 		int user_sentence_length = get_arr_length(subjects) + get_arr_length(verbs) + get_arr_length(objects) + 1;
 		char user_sentence[user_sentence_length];
 		fgets(user_sentence, user_sentence_length, stdin);
 
 		if (user_sentence == "end")
 		{
-			printf("Your score is: 0");
+			printf("Your accuracy score is: %f", total_accuracy);
 			break;
 		}
 
 		if (user_sentence == "score")
 		{
-			printf("Your score is: 0");
+			printf("Your accuracy score is: %f", total_accuracy);
 			continue;
 		}
 
 		// Here we calculate accuracy
-		}
+		total_accuracy += calculateAccuracy(random_sentence, user_sentence);
+	}
 
 	return 0;
 }
