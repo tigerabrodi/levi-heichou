@@ -11,38 +11,38 @@ const char *objects[] = {"the book", "a ball", "over the fence", "fast"};
 char *create_random_sentence()
 {
 	// Generate random index to pick subject, verb, and object
-	int randomIndexForSubjects = rand() % 4;
-	int randomIndexForVerbs = rand() % 4;
-	int randomIndexForObjects = rand() % 4;
+	int random_index_for_subjects = rand() % 4;
+	int random_index_for_verbs = rand() % 4;
+	int random_index_for_objects = rand() % 4;
 
 	char *sentence = malloc(50);
 
 	// Create a random sentence using sprintf
-	sprintf(sentence, "%s %s %s", subjects[randomIndexForSubjects], verbs[randomIndexForVerbs], objects[randomIndexForObjects]);
+	sprintf(sentence, "%s %s %s", subjects[random_index_for_subjects], verbs[random_index_for_verbs], objects[random_index_for_objects]);
 
 	// Return the created random sentence
 	return sentence;
 }
 
 // Function to calculate typing accuracy
-double calculateAccuracy(char *original, char *input)
+double calculate_accuracy(char *original, char *input)
 {
 	// Get lengths of original sentence and user input
-	int lengthOriginal = strlen(original);
-	int lengthInput = strlen(input);
+	int length_original = strlen(original);
+	int length_input = strlen(input);
 	int errors = 0;
 
 	// If lengths are different, it's an error
-	if (lengthOriginal != lengthInput)
+	if (length_original != length_input)
 	{
-		errors += abs(lengthOriginal - lengthInput);
+		errors += abs(length_original - length_input);
 	}
 
 	// Choose smaller length to iterate through characters
-	int lengthToIterate = lengthOriginal < lengthInput ? lengthOriginal : lengthInput;
+	int length_to_iterate = length_original < length_input ? length_original : length_input;
 
 	// Loop through characters and count errors
-	for (int i = 0; i < lengthToIterate; i++)
+	for (int i = 0; i < length_to_iterate; i++)
 	{
 		if (original[i] != input[i])
 		{
@@ -51,8 +51,8 @@ double calculateAccuracy(char *original, char *input)
 	}
 
 	// Calculate accuracy as percentage
-	int totalCharacters = lengthOriginal;
-	return 100.0 * (totalCharacters - errors) / totalCharacters;
+	int total_characters = length_original;
+	return 100.0 * (total_characters - errors) / total_characters;
 }
 
 // Main function
@@ -64,7 +64,7 @@ int main()
 	int rounds_played = 0;
 
 	printf("Welcome to Levi!\n");
-	printf("This is typing practice game.\n");
+	printf("This is a typing practice game.\n");
 	printf("We will calculate your accuracy throughout your tries.\n");
 	printf("A random sentence will be generated and you've to under the sentence as fast as you can.\n");
 	printf("If you enter 'end' the program will exit and display your score.\n");
@@ -95,7 +95,7 @@ int main()
 		}
 		else
 		{
-			double accuracy = calculateAccuracy(random_sentence, user_sentence);
+			double accuracy = calculate_accuracy(random_sentence, user_sentence);
 			total_accuracy += accuracy;
 			rounds_played++;
 		}
