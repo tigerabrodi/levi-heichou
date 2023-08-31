@@ -60,21 +60,16 @@ int main()
 {
 	srand(time(0)); // Seed the random number generator with current time
 
-	// Initialize variables for keeping track of overall accuracy
 	double total_accuracy = 0;
 	int rounds_played = 0;
 
-	// Print welcome message
 	printf("Welcome to Levi!\n");
 	printf("This is a typing practice game.\n");
 
-	// Infinite loop for game
 	while (1)
 	{
-		// Generate a random sentence
 		char *random_sentence = create_random_sentence();
 
-		// Display the random sentence to the user
 		printf("Enter the sentence as fast as you can: %s\n", random_sentence);
 
 		char user_sentence[256];
