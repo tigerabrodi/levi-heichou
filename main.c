@@ -38,19 +38,21 @@ double calculate_accuracy(char *original, char *input)
 	int length_input = strlen(input);
 	int errors = 0;
 
-	// If lengths are different, it's an error
+	// If lengths are different, it's an error (for now)
 	if (length_original != length_input)
 	{
 		errors += abs(length_original - length_input);
 	}
 
 	// Choose smaller length to iterate through characters
-	int length_to_iterate = length_original < length_input ? length_original : length_input;
+	int is_input_longer = length_original < length_input;
+	int length_to_iterate = is_input_longer ? length_original : length_input;
 
 	// Loop through characters and count errors
 	for (int i = 0; i < length_to_iterate; i++)
 	{
-		if (original[i] != input[i])
+		int is_letter_not_match = original[i] != input[i];
+		if (is_letter_not_match)
 		{
 			errors++;
 		}
@@ -61,7 +63,16 @@ double calculate_accuracy(char *original, char *input)
 	return 100.0 * (total_characters - errors) / total_characters;
 }
 
-// Main function
+void print_start_message()
+{
+	printf("Welcome to Levi!\n");
+	printf("This is a typing practice game.\n");
+	printf("We will calculate your accuracy throughout your tries.\n");
+	printf("A random sentence will be generated and you've to under the sentence as fast as you can.\n");
+	printf("If you enter 'end' the program will exit and display your score.\n");
+	printf("If you enter 'score' the program will display your score.\n");
+}
+
 int main()
 {
 	srand(time(0)); // Seed the random number generator with current time
@@ -69,12 +80,7 @@ int main()
 	double total_accuracy = 0;
 	int rounds_played = 0;
 
-	printf("Welcome to Levi!\n");
-	printf("This is a typing practice game.\n");
-	printf("We will calculate your accuracy throughout your tries.\n");
-	printf("A random sentence will be generated and you've to under the sentence as fast as you can.\n");
-	printf("If you enter 'end' the program will exit and display your score.\n");
-	printf("If you enter 'score' the program will display your score.\n");
+	print_start_message();
 
 	while (1)
 	{
@@ -87,7 +93,8 @@ int main()
 
 		user_sentence[strcspn(user_sentence, "\n")] = 0;
 
-		if (strcmp(user_sentence, "end") == 0)
+		int should_exit = strcmp(user_sentence, "end") == 0;
+		if (should_exit)
 		{
 			printf("Your final accuracy score is: %f\n", total_accuracy / rounds_played);
 			printf("Thanks for playing!\n");
@@ -95,16 +102,16 @@ int main()
 			break;
 		}
 
-		if (strcmp(user_sentence, "score") == 0)
+		int should_display_score = strcmp(user_sentence, "score") == 0;
+		if (should_display_score)
 		{
 			printf("Your current accuracy score is: %f\n", total_accuracy / rounds_played);
+			continue;
 		}
-		else
-		{
-			double accuracy = calculate_accuracy(random_sentence, user_sentence);
-			total_accuracy += accuracy;
-			rounds_played++;
-		}
+
+		double accuracy = calculate_accuracy(random_sentence, user_sentence);
+		total_accuracy += accuracy;
+		rounds_played++;
 
 		// Free the allocated memory for the random sentence
 		free(random_sentence);
