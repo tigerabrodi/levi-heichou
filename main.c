@@ -64,7 +64,11 @@ int main()
 	int rounds_played = 0;
 
 	printf("Welcome to Levi!\n");
-	printf("This is a typing practice game.\n");
+	printf("This is typing practice game.\n");
+	printf("We will calculate your accuracy throughout your tries.\n");
+	printf("A random sentence will be generated and you've to under the sentence as fast as you can.\n");
+	printf("If you enter 'end' the program will exit and display your score.\n");
+	printf("If you enter 'score' the program will display your score.\n");
 
 	while (1)
 	{
