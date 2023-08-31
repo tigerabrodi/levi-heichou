@@ -17,6 +17,12 @@ char *create_random_sentence()
 
 	char *sentence = malloc(50);
 
+	if (sentence == NULL)
+	{
+		printf("Error allocating memory!\n");
+		exit(1);
+	}
+
 	// Create a random sentence using sprintf
 	sprintf(sentence, "%s %s %s", subjects[random_index_for_subjects], verbs[random_index_for_verbs], objects[random_index_for_objects]);
 
