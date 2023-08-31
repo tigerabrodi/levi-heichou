@@ -11,7 +11,7 @@ const char *objects[] = {"the book", "a ball", "over the fence", "fast"};
 char *create_random_sentence()
 {
 	// Generate random index to pick subject, verb, and object
-	int randomIndexForSubjects = rand() % 4; // rand() returns a random integer
+	int randomIndexForSubjects = rand() % 4;
 	int randomIndexForVerbs = rand() % 4;
 	int randomIndexForObjects = rand() % 4;
 
